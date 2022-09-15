@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-function App() {
+export default function App() {
   let weatherForecast = {
     city: "Kiev",
     temperature: "15",
@@ -94,4 +94,4 @@ function App() {
   );
 }
 
-export default App;
+
