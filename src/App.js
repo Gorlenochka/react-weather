@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import DateToday from "./DateToday";
 
 export default function App() {
   const [weatherForecast, setWeatherForecast] = useState({ ready: false });
@@ -9,8 +10,7 @@ export default function App() {
     setWeatherForecast({
       ready: true,
       city: "Paris",
-      date: "06.09.2022",
-      time: "21.00",
+      date: new Date(response.data.dt * 1000),
       temperature: Math.round(response.data.main.temp),
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
@@ -54,10 +54,7 @@ export default function App() {
           </div>
           <div className="MainCity">
             <h1 id="search-city">{weatherForecast.city}</h1>
-            <div className="Today">
-              <p className="DateToday">{weatherForecast.date}</p>
-              <p className="Time">{weatherForecast.time}</p>
-            </div>
+            <DateToday date={weatherForecast.date} />
             <div className="Container">
               <div className="Row">
                 <div className="Col">
