@@ -166,3 +166,40 @@ div .Col hr {
   opacity: 100%;
   transition: 500ms ease-in-out;
 }
+
+tr {
+  vertical-align: middle;
+}
+
+.Daily {
+  font-size: 18px;
+}
+
+.DailyWeatherDescription {
+  font-size: 14px;
+}
+
+.DailyMaxTemperature{
+  font-size: 20px;
+  font-weight: bold;
+  color: #006ec5;
+}
+
+.DailyMinTemperature {
+  color: #80b7e2;
+  font-size: 18px;
+}
+
+.DailyMaxTemperature sup,
+.DailyMinTemperature sup {
+  font-size: 12px;
+  color: #5a6275;
+}
+
+.DailyWeatherDescription:first-letter {
+  text-transform: capitalize;
+}
+
+.DailyWeatherImage {
+  width: 40px;
+}

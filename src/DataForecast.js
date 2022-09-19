@@ -32,23 +32,7 @@ export default function DataForecast(props) {
             <hr />
           </div>
         </div>
-      </div>
-      <table className="table table-hover">
-        <tbody>
-          <tr>
-            <th scope="row" className="weekday">
-              Mon 11
-            </th>
-            <td className="temperature-weekday">
-              25 <sup>°С</sup>
-            </td>
-            <td>
-              <img src="/" alt="showers" className="image-weather-weekday" />
-            </td>
-            <td className="description-weather-weekday">Showers</td>
-          </tr>
-        </tbody>
-      </table>
+      </div>     
     </div>
   );
 }

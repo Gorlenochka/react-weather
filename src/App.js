@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import DataForecast from "./DataForecast";
+import DailyForecast from "./DailyForecast";
 import Author from "./Author";
 
 export default function App() {
@@ -11,7 +12,8 @@ export default function App() {
   function forecastResponse(response) {
     console.log(response.data);
     setWeatherForecast({
-      ready: true,       
+      ready: true,  
+      coordinates: response.data.coord,
       date: new Date(response.data.dt * 1000),
       temperature: Math.round(response.data.main.temp),
       humidity: response.data.main.humidity,
@@ -72,7 +74,8 @@ export default function App() {
             </form>
           </div>
           <DataForecast forecast={weatherForecast} city={city} />
-          </div>
+          <DailyForecast coordinates={weatherForecast.coordinates} />
+        </div>
         <Author />
       </div>
     );
