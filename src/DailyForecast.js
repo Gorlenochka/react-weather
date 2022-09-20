@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ForecastWeekday from "./ForecastWeekday";
 
 export default function DailyForecast(props) {
   let [load, setLoad] = useState(false);
-  let [dailyForecast, setDailyForecast] = useState(null);
+  let [dailyWeatherForecast, setDailyWeatherForecast] = useState(null);
 
-    function DailyWeather(response) {    
-    setDailyForecast(response.data.daily);
+  useEffect(() => {
+    setLoad(false);
+  }, [props.coordinates])
+
+  function DailyWeather(response) {
+    setDailyWeatherForecast(response.data.daily);
     setLoad(true);
   }
   if (load) {
@@ -15,16 +19,22 @@ export default function DailyForecast(props) {
       <div className="DailyForecast">
         <table className="table table-hover">
           <tbody>
-            <ForecastWeekday data={dailyForecast[0]} />
+            {dailyWeatherForecast.map(function (weekdayForecast, index) {
+              if (index < 7) {
+                return (<ForecastWeekday data={weekdayForecast}/>);
+              } else {
+                return null;
+              }
+            })}
           </tbody>
         </table>
       </div>
     );
   } else {
-    let lon = props.coordinates.lon;
-    let lat = props.coordinates.lat;
-    const APIKey = "4988ef9330d1f4546a10355cfd9c0b6f";
-    let ApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;    
+    const APIKey = "4988ef9330d1f4546a10355cfd9c0b6f";    
+    let ApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${APIKey}&units=metric`;
 
     axios.get(ApiUrl).then(DailyWeather);
 

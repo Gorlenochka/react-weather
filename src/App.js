@@ -7,12 +7,11 @@ import Author from "./Author";
 
 export default function App() {
   const [weatherForecast, setWeatherForecast] = useState({ ready: false });
-  const [city, setCity] = useState("Kyiv");
+  const [city, setCity] = useState("London");
 
   function forecastResponse(response) {
-    console.log(response.data);
     setWeatherForecast({
-      ready: true,  
+      ready: true,
       coordinates: response.data.coord,
       date: new Date(response.data.dt * 1000),
       temperature: Math.round(response.data.main.temp),
@@ -21,11 +20,12 @@ export default function App() {
       pressure: response.data.main.pressure,
       icon: response.data.weather[0].icon,
       description: response.data.weather[0].description,
-    });
+      city: response.data.name,
+    });    
   }
 
   function search() {
-    const apiKey = "4988ef9330d1f4546a10355cfd9c0b6f";    
+    const apiKey = "4988ef9330d1f4546a10355cfd9c0b6f";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(url).then(forecastResponse);
@@ -79,10 +79,8 @@ export default function App() {
         <Author />
       </div>
     );
-  }
-  
-  else {
+  } else {
     search();
-    return (<p>Loading...</p>);
+    return <p>Loading...</p>;
   }
 }
